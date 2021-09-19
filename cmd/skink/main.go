@@ -1,12 +1,7 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/webolton/skink/internal/filewatcher"
-)
+import "github.com/webolton/skink/internal/commands"
 
 func main() {
-	fmt.Printf("Sneck with arms!\n")
-	filewatcher.Watcher()
+	commands.Execute()
 }
