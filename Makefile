@@ -3,3 +3,6 @@ get:
 
 run:
 	go run cmd/skink/main.go
+
+init:
+	go run cmd/skink/main.go init
