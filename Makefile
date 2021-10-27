@@ -6,3 +6,6 @@ run:
 
 init:
 	go run cmd/skink/main.go init
+
+specs:
+	ginkgo ./...
