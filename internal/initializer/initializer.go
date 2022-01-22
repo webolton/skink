@@ -3,17 +3,13 @@ package initializer
 import (
 	"fmt"
 
-	"github.com/manifoldco/promptui"
 	"github.com/webolton/skink/internal/lib"
+	"github.com/webolton/skink/internal/prompts"
 )
 
 func Execute() {
-	newConfigPrompt := promptui.Select{
-		Label: "Would you like to create a new skink configuration?",
-		Items: []string{"yes", "no"},
-	}
 
-	_, result, err := newConfigPrompt.Run()
+	_, result, err := prompts.NewConfigPrompt.Run()
 
 	if err != nil {
 		fmt.Printf("Prompt failed %v\n", err)
