@@ -11,16 +11,20 @@ func Execute() {
 
 	_, result, err := prompts.NewConfigPrompt.Run()
 
-	if err != nil {
-		fmt.Printf("Prompt failed %v\n", err)
-		return
-	}
+	prompts.PromptError(err) // handle prompt error
 
 	if result == "yes" {
 		if lib.CheckFile("~/.skink.conf") {
-			fmt.Println("there is a file")
-		} else {
-			fmt.Println("no file")
+			_, result, err := prompts.NewConfigConfirmation.Run()
+			prompts.PromptError(err) // handle prompt error
+
+			if result == "yes" {
+				fmt.Println("Call the new config file function")
+			}
+
+			if result == "no" {
+				fmt.Println("Check existing skink config")
+			}
 		}
 	}
 
