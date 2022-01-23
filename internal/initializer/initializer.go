@@ -7,6 +7,34 @@ import (
 	"github.com/webolton/skink/internal/prompts"
 )
 
+type configFileData struct {
+	configFile string
+	syncedDir  string
+	bucket     string
+	key        string
+}
+
+func createConfig() {
+	_, defaultConfig, err := prompts.DefaultConfigFile.Run()
+	prompts.PromptError(err) // handle prompt error
+
+	newConfig := configFileData{configFile: "~/.skink.yml"}
+
+	if defaultConfig == "no" {
+		result, err := prompts.CustomConfigFile.Run()
+		prompts.PromptError(err) // handle prompt error
+
+		newConfig.configFile = result
+	}
+
+	syncedDir, err := prompts.SyncedDir.Run()
+	prompts.PromptError(err) // handle prompt error
+
+	newConfig.syncedDir = syncedDir
+
+	fmt.Println(newConfig)
+}
+
 func Execute() {
 
 	_, result, err := prompts.NewConfigPrompt.Run()
@@ -18,13 +46,11 @@ func Execute() {
 			_, result, err := prompts.NewConfigConfirmation.Run()
 			prompts.PromptError(err) // handle prompt error
 
-			if result == "yes" {
-				fmt.Println("Call the new config file function")
-			}
-
 			if result == "no" {
-				fmt.Println("Check existing skink config")
+				fmt.Println("Check existing skink config probably a function")
 			}
+		} else {
+			createConfig()
 		}
 	}
 
