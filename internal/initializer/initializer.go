@@ -39,17 +39,16 @@ func createConfig() {
 
 func Execute() {
 
-	_, result, err := prompts.NewConfigPrompt.Run()
-
-	prompts.PromptError(err) // handle prompt error
+	_, result, err := prompts.NewConfigPrompt.Run() // Prompt new config file?
+	prompts.PromptError(err)                        // Handle prompt error
 
 	if result == "yes" {
-		if lib.CheckFile("~/.skink.conf") {
-			_, result, err := prompts.NewConfigConfirmation.Run()
-			prompts.PromptError(err) // handle prompt error
+		if lib.FileExists(configLocation) { // Does a config file already exist?
+			_, result, err := prompts.NewConfigConfirmation.Run() // Prompt new config or use old?
+			prompts.PromptError(err)                              // handle prompt error
 
 			if result == "no" {
-				fmt.Println("Check existing skink config probably a function")
+				fmt.Println("Manually check on config for now, but this will be automated")
 			}
 		} else {
 			createConfig()
