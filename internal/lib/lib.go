@@ -1,8 +1,21 @@
 package lib
 
-import "os"
+import (
+	"fmt"
+	"log"
+	"os"
+	"regexp"
+)
 
-func CheckFile(fileName string) bool {
+func HomeDir() string {
+	dirname, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return dirname
+}
+
+func FileExists(fileName string) bool {
 	_, error := os.Stat(fileName)
 	return error == nil
 }

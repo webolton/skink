@@ -14,11 +14,13 @@ type configFileData struct {
 	key        string
 }
 
+var configLocation = fmt.Sprintf("%s/.skink.yml", lib.HomeDir()) // default config location
+
 func createConfig() {
 	_, defaultConfig, err := prompts.DefaultConfigFile.Run()
 	prompts.PromptError(err) // handle prompt error
 
-	newConfig := configFileData{configFile: "~/.skink.yml"}
+	newConfig := configFileData{configFile: configLocation}
 
 	if defaultConfig == "no" {
 		result, err := prompts.CustomConfigFile.Run()
