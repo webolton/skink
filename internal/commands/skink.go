@@ -9,7 +9,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "skink",
-	Short: "its like a snake with legs",
+	Short: "\"It's like a snake with legs\"",
 	Long:  "A file syncing program that runs as a service",
 	RunE: func(commands *cobra.Command, args []string) error {
 		return commands.Help()
