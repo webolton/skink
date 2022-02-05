@@ -56,6 +56,9 @@ func Execute() {
 	}
 
 	if result == "no" {
-		fmt.Println("old config")
+		if !lib.FileExists(configLocation) {
+			fmt.Println("Are you sure? A configuration file does not exist")
+		}
+		fmt.Println("Manually check on config for now, but this will be automated")
 	}
 }
