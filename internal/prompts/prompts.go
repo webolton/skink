@@ -36,10 +36,24 @@ var SyncedDir = promptui.Prompt{
 	Label: "The file path to the directory you would like to sync", // TODO: verify existence
 }
 
-var Bucket = promptui.Prompt{
-	Label: "The s3 bucket to sync files to",
+var DefaultAwsCredsFile = promptui.Select{
+	Label: "Would you like to use your default AWS credentials file?",
+	Items: []string{"yes", "no"},
 }
 
-var Key = promptui.Prompt{
-	Label: "The s3 bucket key for authenticating with AWS", // TODO: verify ability to write
+// TODO: verify existence validated bucket url / ping
+var AMI = promptui.Prompt{
+	Label: "The AMI profile of the credentials to use",
 }
+
+var AwsRegion = promptui.Prompt{
+	Label: "aws region",
+}
+
+// TODO: don't use default AWS credentials file
+// var AwsAccessKeyID = promptui.Prompt{
+// 	Label: "aws access key id",
+
+// var AwsSecretAccessKey = promptui.Prompt{
+// 	Label: "aws secret access key",
+// }

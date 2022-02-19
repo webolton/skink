@@ -28,10 +28,21 @@ func createConfig() {
 
 	parsedDir := lib.ParseDirPath(syncedDir) // parse and validate path to synced directory
 
-	newConfig.syncedDir = parsedDir
+	newConfig.SyncedDir = parsedDir
 
+	_, defaultAwsCredsFile, err := prompts.DefaultAwsCredsFile.Run()
+	prompts.PromptError(err) // handle prompt error
 
-	fmt.Println(newConfig)
+	if defaultAwsCredsFile == "yes" {
+		ami, err := prompts.AMI.Run()
+		prompts.PromptError(err) // handle prompt error
+		newConfig.AMI = ami
+
+		awsRegion, err := prompts.AwsRegion.Run()
+		prompts.PromptError(err) // handle prompt error
+
+		newConfig.AwsRegion = awsRegion
+	} // TODO: store credentials in config file, rather than reading from default
 }
 
 func Execute() {
