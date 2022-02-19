@@ -4,15 +4,9 @@ import (
 	"fmt"
 
 	"github.com/webolton/skink/internal/lib"
+	"github.com/webolton/skink/internal/models"
 	"github.com/webolton/skink/internal/prompts"
 )
-
-type configFileData struct {
-	configFile string
-	syncedDir  string
-	bucket     string
-	key        string
-}
 
 var configLocation = fmt.Sprintf("%s/.skink.yml", lib.HomeDir()) // default config location
 
@@ -20,13 +14,13 @@ func createConfig() {
 	_, defaultConfig, err := prompts.DefaultConfigFile.Run()
 	prompts.PromptError(err) // handle prompt error
 
-	newConfig := configFileData{configFile: configLocation}
+	newConfig := models.ConfigFileData{ConfigFile: configLocation}
 
 	if defaultConfig == "no" {
 		result, err := prompts.CustomConfigFile.Run()
 		prompts.PromptError(err) // handle prompt error
 
-		newConfig.configFile = result
+		newConfig.ConfigFile = result
 	}
 
 	syncedDir, err := prompts.SyncedDir.Run()
