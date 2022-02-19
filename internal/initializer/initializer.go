@@ -32,7 +32,10 @@ func createConfig() {
 	syncedDir, err := prompts.SyncedDir.Run()
 	prompts.PromptError(err) // handle prompt error
 
-	newConfig.syncedDir = syncedDir
+	parsedDir := lib.ParseDirPath(syncedDir) // parse and validate path to synced directory
+
+	newConfig.syncedDir = parsedDir
+
 
 	fmt.Println(newConfig)
 }
