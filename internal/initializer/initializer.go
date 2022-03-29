@@ -42,6 +42,12 @@ func createConfig() {
 		prompts.PromptError(err) // handle prompt error
 
 		newConfig.AwsRegion = awsRegion
+
+		bucket, err := prompts.Bucket.Run()
+		prompts.PromptError(err) // handle prompt error
+
+		newConfig.Bucket = bucket
+
 	} // TODO: store credentials in config file, rather than reading from default
 }
 

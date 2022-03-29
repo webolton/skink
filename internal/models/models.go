@@ -5,4 +5,5 @@ type ConfigFileData struct {
 	SyncedDir  string
 	AMI        string
 	AwsRegion  string
+	Bucket     string
 }
