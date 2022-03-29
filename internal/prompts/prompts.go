@@ -41,13 +41,17 @@ var DefaultAwsCredsFile = promptui.Select{
 	Items: []string{"yes", "no"},
 }
 
-// TODO: verify existence validated bucket url / ping
 var AMI = promptui.Prompt{
-	Label: "The AMI profile of the credentials to use",
+	Label: "The profile of the credentials to use (default or AMI)",
 }
 
-var AwsRegion = promptui.Prompt{
+var AWSRegion = promptui.Select{
 	Label: "aws region",
+	Items: []string{"us-east-2", "us-east-1", "us-west-1", "us-west-2"},
+}
+
+var Bucket = promptui.Prompt{
+	Label: "aws bucket name",
 }
 
 // TODO: don't use default AWS credentials file
