@@ -1,3 +1,5 @@
+.PHONY: run
+
 get:
 	go get -u -d ./...
 
