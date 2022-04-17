@@ -18,5 +18,15 @@ func (c *models.Config) Initialize(args []string) error {
 		awsRegion       = flags.String("aws_region", "", "Region of bucket")
 		bucket          = flags.String("bucket", "", "Name of S3 bucket")
 	)
-	return errors.New("Placeholder")
+
+	if err := flags.Parse(args[1:])l err != nil {
+		return err
+	}
+
+	c.SyncedDirPath = *syncedDirPath
+	c.AMI = *ami
+	c.AwsRegion = *awsRegion
+	c.Bucket = *bucket
+
+	return nil
 }
