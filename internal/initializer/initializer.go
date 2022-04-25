@@ -1,13 +1,19 @@
 package initializer
 
 import (
-	"errors"
-
 	"github.com/namsral/flag"
-	"github.com/webolton/skink/internal/models"
 )
 
-func (c *models.Config) Initialize(args []string) error {
+type Config struct {
+	DefaultAWSCreds bool
+	ConfigFilePath  string
+	SyncedDirPath   string
+	AMI             string
+	AwsRegion       string
+	Bucket          string
+}
+
+func (c Config) Initialize(args []string) error {
 	flags := flag.NewFlagSet(args[0], flag.ExitOnError)
 	flags.String(flag.DefaultConfigFlagname, "/etc/skink.conf", "Path to config file")
 
@@ -19,10 +25,11 @@ func (c *models.Config) Initialize(args []string) error {
 		bucket          = flags.String("bucket", "", "Name of S3 bucket")
 	)
 
-	if err := flags.Parse(args[1:])l err != nil {
+	if err := flags.Parse(args[1:]); err != nil {
 		return err
 	}
 
+	c.DefaultAWSCreds = *defaultAWSCreds
 	c.SyncedDirPath = *syncedDirPath
 	c.AMI = *ami
 	c.AwsRegion = *awsRegion
