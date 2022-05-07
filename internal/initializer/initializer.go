@@ -13,8 +13,9 @@ type Config struct {
 	Bucket          string
 }
 
-func (c Config) Initialize(args []string) error {
+func (c *Config) Initialize(args []string) error {
 	flags := flag.NewFlagSet(args[0], flag.ExitOnError)
+
 	flags.String(flag.DefaultConfigFlagname, "/etc/skink.conf", "Path to config file")
 
 	var (
